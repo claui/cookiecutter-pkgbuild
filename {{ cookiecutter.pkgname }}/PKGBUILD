@@ -1,0 +1,95 @@
+# Maintainer: {{ cookiecutter.pkgbuild_maintainer }}
+
+pkgname={{ cookiecutter.pkgname }}
+pkgver={{ cookiecutter.pkgver }}
+pkgrel=1
+pkgdesc='{{ cookiecutter.pkgdesc }}'
+arch=('any')
+url='https://github.com/Foo/foo'
+license=('{{ cookiecutter.upstream_license }}')
+groups=()
+depends=()
+makedepends=()
+checkdepends=()
+optdepends=('baz: Use baz for quxing')
+provides=()
+conflicts=('{{ cookiecutter.pkgname }}-git')
+replaces=()
+backup=()
+options=('!strip')
+install="${pkgname}.install"
+changelog=
+
+source=(
+  "${pkgname}-${pkgver}.tar.gz::https://github.com/Foo/foo/archive/v${pkgver}.tar.gz"
+  "${pkgname}::git+https://github.com/Foo/foo.git"
+)
+
+sha512sums=(
+  '00000000001'
+  'SKIP'
+)
+
+noextract=("${pkgname}.tar.gz")
+
+# This function is optional and can be omitted from PKGBUILD.
+prepare() {
+  tar -x \
+    -f "${srcdir}/${pkgname}.tar.gz" -z \
+    --no-anchored --wildcards -C "${srcdir}" \
+    --exclude='test' \
+    --strip-components=1 \
+    '.editorconfig' 'foo' 'bar' 'baz' \
+    'CONTRIBUTING.md' 'README.md' '*.sh'
+}
+
+# This function is only needed for VCS packages.
+# Before first-time use, assign `pkgver=VERSION` (literally);
+# makepkg will call this function and then auto-bump the variable.
+pkgver() {
+  printf "r%s.%s" \
+    "$(git -C "${pkgname}" rev-list --count HEAD)" \
+    "$(git -C "${pkgname}" rev-parse --short HEAD)"
+}
+
+# Builds the package.
+#
+# Before makepkg invokes this function, each URL
+# from the ${source} array is downloaded and copied
+# to ${srcdir}.
+#
+# If a source is given as a relative path, it is assumed to
+# be local, and relative to the directory that contains
+# this PKGBUILD file.
+#
+# If the fetched file is an archive, it is extracted to
+# ${srcdir} instead of being copied, unless it is
+# referenced in ${noextract}.
+#
+# This function is optional and can be omitted from PKGBUILD.
+# When this function returns, makepkg expects all
+# build artifacts to be in ${srcdir}, ready to be packaged.
+build() {
+  :
+}
+
+# This function is optional and can be omitted from PKGBUILD.
+check() {
+  :
+}
+
+# Install the package.
+#
+# By the time makepkg invokes this function, we can expect
+# that all build artifacts are in ${srcdir} just like
+# they were built.
+package() {
+  # Variables exported to this scope:
+  #   ${srcdir}
+  #   ${pkgdir}
+  #   and all of the variables declared above
+
+  echo >&2 'Packaging the license'
+  install -D -m 644 -t "${pkgdir}/usr/share/licenses/${pkgname}" \
+    "${srcdir}/LICENSE"
+}
