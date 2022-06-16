@@ -13,6 +13,9 @@
   "[jsonc]": {
     "editor.defaultFormatter": "vscode.json-language-features"
   },
+  "editor.rulers": [
+    68
+  ],
   "files.exclude": {
     "**/.git": true
   }
