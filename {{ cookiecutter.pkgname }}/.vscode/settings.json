@@ -16,7 +16,12 @@
   "editor.rulers": [
     68
   ],
+  "files.associations": {
+    "PKGBUILD": "shellscript"
+  },
   "files.exclude": {
     "**/.git": true
-  }
+  },
+  "shellcheck.enable": true,
+  "shellcheck.useWorkspaceRootAsCwd": true
 }
