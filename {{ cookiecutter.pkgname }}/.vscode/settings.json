@@ -1,3 +1,11 @@
+/*
+ * After changing this file, run:
+ *
+ *     tar -cv -f .vscode.untar-me.tar.xz -J .vscode
+ *
+ * to update the `.vscode.untar-me.tar.xz` file.
+ * The file is needed to work around an AUR issue.
+ */
 {
   "[json]": {
     "editor.defaultFormatter": "vscode.json-language-features"
