@@ -1,7 +1,5 @@
 # Maintainer: {{ cookiecutter.pkgbuild_maintainer }}
 
-# To enable linting in VS Code, run: tar -xf .vscode.untar-me.tar.xz
-
 pkgname={{ cookiecutter.pkgname }}
 pkgver={{ cookiecutter.pkgver }}
 pkgrel=1
