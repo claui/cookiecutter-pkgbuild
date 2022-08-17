@@ -14,5 +14,10 @@
   "files.exclude": {
     "**/.git": true
   },
+  "shellcheck.customArgs": [
+    "--external-sources",
+    "--shell",
+    "bash"
+  ],
   "shellcheck.useWorkspaceRootAsCwd": true
 }
