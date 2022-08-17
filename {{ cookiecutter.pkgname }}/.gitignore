@@ -4,5 +4,4 @@
 *.log
 *.pkg.*
 *.tar.*
-!.vscode.untar-me.tar.*
 *.zip
