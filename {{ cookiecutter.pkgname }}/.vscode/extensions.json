@@ -2,7 +2,6 @@
   "recommendations": [
     "claui.packaging",
     "editorconfig.editorconfig",
-    "ms-python.python",
-    "samuelcolvin.jinjahtml"
+    "nico-castell.linux-desktop-file"
   ]
 }

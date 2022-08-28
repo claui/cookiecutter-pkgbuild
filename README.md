@@ -34,7 +34,7 @@ cookiecutter pkgbuild
 
 ## License
 
-Copyright (c) 2021 Claudia Pellegrino <clau@tiqua.de>
+Copyright (c) 2021 – 2022 Claudia Pellegrino <clau@tiqua.de>
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

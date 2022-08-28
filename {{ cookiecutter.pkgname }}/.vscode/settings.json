@@ -8,16 +8,7 @@
   "editor.rulers": [
     68
   ],
-  "files.associations": {
-    "PKGBUILD": "shellscript"
-  },
   "files.exclude": {
     "**/.git": true
-  },
-  "shellcheck.customArgs": [
-    "--external-sources",
-    "--shell",
-    "bash"
-  ],
-  "shellcheck.useWorkspaceRootAsCwd": true
+  }
 }
