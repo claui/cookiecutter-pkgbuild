@@ -10,6 +10,5 @@
   },
   "files.exclude": {
     "**/.git": true
-  },
-  "python.linting.pylintEnabled": true
+  }
 }
