@@ -6,7 +6,8 @@
     "editor.defaultFormatter": "vscode.json-language-features"
   },
   "files.associations": {
-    "**/hooks/*_gen_project.py": "jinja-py"
+    "**/hooks/*_gen_project.py": "jinja-py",
+    ".nvchecker.toml": "jinja-toml"
   },
   "files.exclude": {
     "**/.git": true

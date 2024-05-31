@@ -1,0 +1,5 @@
+[{{ cookiecutter.pkgname }}]
+source = "{{ cookiecutter.nvchecker_source }}"
+{{ cookiecutter.nvchecker_source }} = ""
+# prefix = "v"
+# use_latest_release = true
