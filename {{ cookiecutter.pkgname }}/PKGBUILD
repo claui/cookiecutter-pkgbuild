@@ -7,18 +7,41 @@ _gitpkgname={{ cookiecutter.gitpkgname }}
 pkgver={{ cookiecutter.pkgver }}
 pkgrel=1
 pkgdesc='{{ cookiecutter.pkgdesc }}'
-arch=('any')
+arch=('x86_64')
 url='https://github.com/Foo/foo'
 license=('{{ cookiecutter.upstream_license }}')
 # groups=()
-depends=()
+depends=(
+  {% if cookiecutter.is_python_package -%}
+  'python'
+  {% endif -%}
+  ''
+)
 makedepends=(
   {% if cookiecutter.is_vcs -%}
   'git'
   {% endif -%}
+  {% if cookiecutter.is_python_package -%}
+  'python-build'
+  # 'python-flit'
+  # 'python-hatchling'
+  # 'python-hatch-vcs'
+  'python-installer'
+  # 'python-poetry-core'
+  # 'python-setuptools'
+  # 'python-setuptools-scm'
+  'python-sphinx'
+  'python-sphinx_rtd_theme'
+  'python-wheel'
+  {% endif -%}
   ''
 )
-checkdepends=()
+checkdepends=(
+  {% if cookiecutter.is_python_package -%}
+  'python-unittest'
+  {% endif -%}
+  ''
+)
 # optdepends=('baz: Use baz for quxing')
 {% if cookiecutter.is_vcs -%}
 provides=("{{ cookiecutter.pkgname_no_vcs }}=${pkgver}")
@@ -62,21 +85,62 @@ prepare() {
 
 build() {
   cd "{{ cookiecutter.src_subdir }}"
+  {% if cookiecutter.is_python_package -%}
+  echo >&2 'Building wheel'
+  python -m build --wheel --no-isolation
 
+  echo >&2 'Generating man page'
+  sphinx-build -aqEW -b man docs docs/build/man
+
+  echo >&2 'Generating HTML documentation'
+  sphinx-build -aqEW -b singlehtml docs docs/build/singlehtml
+  {%- endif %}
 }
 
 check() {
-  cd "{{ cookiecutter.src_subdir }}"
+  {% if cookiecutter.is_python_package -%}
+  cd "$(mktemp -d -p "${srcdir}")"
+  python -m venv --clear --system-site-packages .venv
+  # shellcheck disable=SC1091
+  source .venv/bin/activate
+  pip install --force-reinstall --no-deps ../dist/*.whl
 
+  echo >&2 'Running unit tests'
+  python -m unittest discover -v ..
+
+  # echo >&2 'Testing the executable'
+  # {{ cookiecutter.pkgname_var }} --version > actual.txt
+  # if ! grep -qF "{{ cookiecutter.pkgname_var }} v${pkgver}" actual.txt; then
+  #   printf >&2 '%s\n' 'Unexpected test output:' '==='
+  #   cat >&2 actual.txt
+  #   printf >&2 '\n%s\n' '==='
+  #   exit 1
+  # fi
+
+  deactivate
+  {%- else -%}
+  cd "{{ cookiecutter.src_subdir }}"
+  {%- endif %}
 }
 
 package() {
   cd "{{ cookiecutter.src_subdir }}"
 
+  {% if cookiecutter.is_python_package -%}
+  echo >&2 'Packaging the wheel'
+  python -I -m installer --destdir="${pkgdir}" dist/*.whl
+  {%- else -%}
   echo >&2 'Packaging the executable'
   install -D -m 755 -t "${pkgdir}/usr/bin" "bin/{{ cookiecutter.pkgname_var }}"
+  {%- endif %}
 
-  echo >&2 'Packaging the README'
+  echo >&2 'Packaging the documentation'
+  {% if cookiecutter.is_python_package -%}
+  cp -R --preserve=mode -t "${pkgdir}/usr/share/doc/${pkgname}" \
+    docs/build/singlehtml/{index.html,_static}
+  install -D -m 644 -t "${pkgdir}/usr/share/man/man1" \
+    docs/build/man/*.1
+  {% endif -%}
   install -D -m 644 -t "${pkgdir}/usr/share/doc/${pkgname}" \
     'README.md'
 

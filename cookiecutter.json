@@ -162,5 +162,6 @@
     "sparkle",
     "ubuntupkg",
     "vsmarketplace"
-  ]
+  ],
+  "is_python_package": false
 }
