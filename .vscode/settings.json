@@ -7,7 +7,8 @@
   },
   "files.associations": {
     "**/hooks/*_gen_project.py": "jinja-py",
-    ".nvchecker.toml": "jinja-toml"
+    ".nvchecker.toml": "jinja-toml",
+    "PKGBUILD": "jinja-shell"
   },
   "files.exclude": {
     "**/.git": true
