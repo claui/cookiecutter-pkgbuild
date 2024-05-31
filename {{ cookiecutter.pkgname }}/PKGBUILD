@@ -12,7 +12,12 @@ url='https://github.com/Foo/foo'
 license=('{{ cookiecutter.upstream_license }}')
 # groups=()
 depends=()
-makedepends=()
+makedepends=(
+  {% if cookiecutter.is_vcs -%}
+  'git'
+  {% endif -%}
+  ''
+)
 checkdepends=()
 # optdepends=('baz: Use baz for quxing')
 {% if cookiecutter.is_vcs -%}
