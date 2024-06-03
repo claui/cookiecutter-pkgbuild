@@ -38,7 +38,7 @@ makedepends=(
 )
 checkdepends=(
   {% if cookiecutter.is_python_package -%}
-  'python-unittest'
+  'python-pytest'
   {% endif -%}
   ''
 )
@@ -106,7 +106,8 @@ check() {
   # export PYTHONPATH="${PWD}/tmp_install/${_site_packages}"
 
   echo >&2 'Running unit tests'
-  python -m unittest discover -v ..
+  pytest
+  # python -m unittest discover -v
 
   # echo >&2 'Testing the executable'
   # {{ cookiecutter.pkgname_var }} --version > actual.txt
