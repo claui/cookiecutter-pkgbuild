@@ -98,12 +98,12 @@ build() {
 }
 
 check() {
+  cd "{{ cookiecutter.src_subdir }}"
   {% if cookiecutter.is_python_package -%}
-  cd "$(mktemp -d -p "{{ cookiecutter.src_subdir }}")"
-  python -m venv --clear --system-site-packages .venv
-  # shellcheck disable=SC1091
-  source .venv/bin/activate
-  pip install --force-reinstall --no-deps ../dist/*.whl
+  # local _site_packages PYTHONPATH
+  # _site_packages="$(python -c 'import site; print(site.getsitepackages()[0])')"
+  # python -m installer --destdir=tmp_install dist/*.whl
+  # export PYTHONPATH="${PWD}/tmp_install/${_site_packages}"
 
   echo >&2 'Running unit tests'
   python -m unittest discover -v ..
@@ -116,10 +116,6 @@ check() {
   #   printf >&2 '\n%s\n' '==='
   #   exit 1
   # fi
-
-  deactivate
-  {%- else -%}
-  cd "{{ cookiecutter.src_subdir }}"
   {%- endif %}
 }
 
