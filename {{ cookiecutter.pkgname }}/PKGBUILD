@@ -139,9 +139,9 @@ package() {
     docs/build/singlehtml/{index.html,_static}
   {% endif -%}
   install -D -m 644 -t "${pkgdir}/usr/share/doc/${pkgname}" \
-    'README.md'
+    README.md
 
   echo >&2 'Packaging the license'
   install -D -m 644 -t "${pkgdir}/usr/share/licenses/${pkgname}" \
-    'LICENSE'
+    LICENSE
 }
