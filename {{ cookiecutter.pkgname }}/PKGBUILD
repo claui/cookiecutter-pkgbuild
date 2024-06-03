@@ -99,7 +99,7 @@ build() {
 
 check() {
   {% if cookiecutter.is_python_package -%}
-  cd "$(mktemp -d -p "${srcdir}")"
+  cd "$(mktemp -d -p "{{ cookiecutter.src_subdir }}")"
   python -m venv --clear --system-site-packages .venv
   # shellcheck disable=SC1091
   source .venv/bin/activate
