@@ -136,10 +136,10 @@ package() {
 
   echo >&2 'Packaging the documentation'
   {% if cookiecutter.is_python_package -%}
-  cp -R --preserve=mode -t "${pkgdir}/usr/share/doc/${pkgname}" \
-    docs/build/singlehtml/{index.html,_static}
   install -D -m 644 -t "${pkgdir}/usr/share/man/man1" \
     docs/build/man/*.1
+  cp -R --preserve=mode -t "${pkgdir}/usr/share/doc/${pkgname}" \
+    docs/build/singlehtml/{index.html,_static}
   {% endif -%}
   install -D -m 644 -t "${pkgdir}/usr/share/doc/${pkgname}" \
     'README.md'
