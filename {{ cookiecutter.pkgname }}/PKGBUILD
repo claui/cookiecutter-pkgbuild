@@ -100,13 +100,13 @@ build() {
 check() {
   cd "{{ cookiecutter.src_subdir }}"
   {% if cookiecutter.is_python_package -%}
-  # local _site_packages PYTHONPATH
+  # local _site_packages
   # _site_packages="$(python -c 'import site; print(site.getsitepackages()[0])')"
   # python -m installer --destdir=tmp_install dist/*.whl
-  # export PYTHONPATH="${PWD}/tmp_install/${_site_packages}"
 
   echo >&2 'Running unit tests'
   pytest
+  # PYTHONPATH="${PWD}/tmp_install/${_site_packages}" pytest
   # python -m unittest discover -v
 
   # echo >&2 'Testing the executable'
