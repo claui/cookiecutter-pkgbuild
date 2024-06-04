@@ -132,15 +132,14 @@ package() {
   {%- endif %}
 
   echo >&2 'Packaging the documentation'
+  install -D -m 644 -t "${pkgdir}/usr/share/doc/${pkgname}" \
+    README.md
   {% if cookiecutter.is_python_package -%}
   install -D -m 644 -t "${pkgdir}/usr/share/man/man1" \
     docs/build/man/*.1
   cp -R --preserve=mode -t "${pkgdir}/usr/share/doc/${pkgname}" \
     docs/build/singlehtml/{index.html,_static}
-  {% endif -%}
-  install -D -m 644 -t "${pkgdir}/usr/share/doc/${pkgname}" \
-    README.md
-
+  {% endif %}
   echo >&2 'Packaging the license'
   install -D -m 644 -t "${pkgdir}/usr/share/licenses/${pkgname}" \
     LICENSE
