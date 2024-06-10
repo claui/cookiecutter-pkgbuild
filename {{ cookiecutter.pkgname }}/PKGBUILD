@@ -7,7 +7,11 @@ _gitpkgname={{ cookiecutter.gitpkgname }}
 pkgver={{ cookiecutter.pkgver }}
 pkgrel=1
 pkgdesc='{{ cookiecutter.pkgdesc }}'
+{% if cookiecutter.is_python_package -%}
+arch=('any')
+{%- else -%}
 arch=('x86_64')
+{%- endif %}
 url='https://github.com/Foo/foo'
 license=('{{ cookiecutter.upstream_license }}')
 # groups=()
