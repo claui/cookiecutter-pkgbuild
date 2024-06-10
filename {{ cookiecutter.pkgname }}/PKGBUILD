@@ -31,6 +31,7 @@ makedepends=(
   # 'python-hatchling'
   # 'python-hatch-vcs'
   'python-installer'
+  # 'python-pdm-backend'
   # 'python-poetry-core'
   # 'python-setuptools'
   # 'python-setuptools-scm'
