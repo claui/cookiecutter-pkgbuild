@@ -143,7 +143,7 @@ package() {
   install -D -m 644 -t "${pkgdir}/usr/share/man/man1" \
     docs/build/man/*.1
   cp -R --preserve=mode -t "${pkgdir}/usr/share/doc/${pkgname}" \
-    docs/build/singlehtml/{index.html,_static}
+    docs/build/singlehtml/{index.html,_images,_static}
   {% endif %}
   echo >&2 'Packaging the license'
   install -D -m 644 -t "${pkgdir}/usr/share/licenses/${pkgname}" \
