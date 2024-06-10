@@ -7,7 +7,11 @@ _gitpkgname={{ cookiecutter.gitpkgname }}
 pkgver={{ cookiecutter.pkgver }}
 pkgrel=1
 pkgdesc='{{ cookiecutter.pkgdesc }}'
+{% if cookiecutter.is_python_package -%}
+arch=('any')
+{%- else -%}
 arch=('x86_64')
+{%- endif %}
 url='https://github.com/Foo/foo'
 license=('{{ cookiecutter.upstream_license }}')
 # groups=()
@@ -27,6 +31,7 @@ makedepends=(
   # 'python-hatchling'
   # 'python-hatch-vcs'
   'python-installer'
+  # 'python-pdm-backend'
   # 'python-poetry-core'
   # 'python-setuptools'
   # 'python-setuptools-scm'
@@ -138,7 +143,7 @@ package() {
   install -D -m 644 -t "${pkgdir}/usr/share/man/man1" \
     docs/build/man/*.1
   cp -R --preserve=mode -t "${pkgdir}/usr/share/doc/${pkgname}" \
-    docs/build/singlehtml/{index.html,_static}
+    docs/build/singlehtml/{index.html,_images,_static}
   {% endif %}
   echo >&2 'Packaging the license'
   install -D -m 644 -t "${pkgdir}/usr/share/licenses/${pkgname}" \
