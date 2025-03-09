@@ -34,16 +34,6 @@ cookiecutter pkgbuild
 
 ## License
 
-Copyright (c) 2021 – 2022 Claudia Pellegrino <clau@tiqua.de>
+Copyright (c) 2021 – 2025 Claudia Pellegrino <clau@tiqua.de>
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-For a copy of the License, see [LICENSE](LICENSE).
-
-### Additional license files
-
-This project may include additional license files other than the
-Apache License. Those are just there for the template user’s
-convenience so they can choose a license for their own content.
-Those licenses may not apply to this project. The only license
-that applies to this project is the Apache License.
+Licensed under the BSD Zero Clause License, see [LICENSE](LICENSE).
