@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: Claudia Pellegrino
+# SPDX-License-Identifier: 0BSD
+
 """
 {% set gitpkgname = cookiecutter.pkgname.removeprefix("python-").removesuffix("-git") %}
 {% set is_vcs = cookiecutter.pkgver == "VERSION" %}

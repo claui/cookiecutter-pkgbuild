@@ -1,0 +1,14 @@
+# https://reuse.software/spec-3.3/
+
+version = 1
+
+[[annotations]]
+path = [
+    "**/.vscode/**",
+    ".editorconfig",
+    ".gitattributes",
+    "cookiecutter.json",
+    "README.md",
+]
+SPDX-FileCopyrightText = "Claudia Pellegrino"
+SPDX-License-Identifier = "0BSD"
